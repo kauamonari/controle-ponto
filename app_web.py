@@ -4,6 +4,29 @@ from flask import Flask, render_template
 app = Flask(__name__)
 
 
+def criar_tabela_se_nao_existir():
+    conn = sqlite3.connect("pontos.db")
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS pontos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            periodo TEXT NOT NULL,
+            data TEXT NOT NULL,
+            entrada TEXT,
+            saida_almoco TEXT,
+            volta_almoco TEXT,
+            saida TEXT,
+            horas_trabalhadas TEXT,
+            saldo TEXT,
+            criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+
+    conn.commit()
+    conn.close()
+
+
 def saldo_para_minutos(saldo):
     sinal = -1 if saldo.startswith("-") else 1
     horas, minutos = saldo[1:].split(":")
@@ -22,6 +45,8 @@ def minutos_para_saldo(total):
 
 @app.route("/")
 def home():
+    criar_tabela_se_nao_existir()
+
     conn = sqlite3.connect("pontos.db")
     cursor = conn.cursor()
 
