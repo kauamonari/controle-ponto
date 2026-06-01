@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Banco de Horas</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .cards {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            min-width: 260px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 15px;
+            color: #555;
+        }
+
+        .saldo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #111;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #222;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Banco de Horas 🚀</h1>
+
+    <div class="cards">
+        {% for card in cards %}
+            <div class="card">
+                <h3>{{ card.periodo }}</h3>
+                <div class="saldo">{{ card.saldo }}</div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Período</th>
+                <th>Data</th>
+                <th>Entrada</th>
+                <th>Saída</th>
+                <th>Saldo</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for ponto in pontos %}
+                <tr>
+                    <td>{{ ponto[0] }}</td>
+                    <td>{{ ponto[1] }}</td>
+                    <td>{{ ponto[2] }}</td>
+                    <td>{{ ponto[3] }}</td>
+                    <td>{{ ponto[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</body>
+
+</html>
